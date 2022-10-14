@@ -1,5 +1,9 @@
+import abstractions.formulas.Atomic;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Atomic a = new Atomic("p");
+
+        System.out.println(a);
     }
 }
