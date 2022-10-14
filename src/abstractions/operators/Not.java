@@ -1,10 +1,12 @@
 package abstractions.operators;
 
-public class Not {
+import abstractions.formulas.Formula;
 
-    private String inner;
+public class Not extends Formula {
 
-    public Not(String inner) {
+    private Formula inner;
+
+    public Not(Formula inner) {
         this.inner = inner;
     }
 

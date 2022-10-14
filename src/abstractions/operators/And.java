@@ -1,11 +1,13 @@
 package abstractions.operators;
 
-public class And {
+import abstractions.formulas.Formula;
+
+public class And extends Formula {
     
-    private String left;
-    private String right;
+    private Formula left;
+    private Formula right;
     
-    public And(String left, String right) {
+    public And(Formula left, Formula right) {
         this.left = left;
         this.right = right;
     }

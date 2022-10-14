@@ -1,11 +1,13 @@
 package abstractions.operators;
 
-public class Or {
+import abstractions.formulas.Formula;
 
-    private String left;
-    private String right;
+public class Or extends Formula {
+
+    private Formula left;
+    private Formula right;
     
-    public Or(String left, String right) {
+    public Or(Formula left, Formula right) {
         this.left = left;
         this.right = right;
     }

@@ -1,11 +1,13 @@
 package abstractions.operators;
 
-public class Implies {
-    
-    private String left;
-    private String right;
+import abstractions.formulas.Formula;
 
-    public Implies(String left, String right) {
+public class Implies extends Formula {
+    
+    private Formula left;
+    private Formula right;
+
+    public Implies(Formula left, Formula right) {
         this.left = left;
         this.right = right;
     }
