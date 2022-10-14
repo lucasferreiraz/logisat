@@ -10,6 +10,10 @@ public class Not extends Formula {
         this.inner = inner;
     }
 
+    public Formula getInner() {
+        return inner;
+    }
+
     @Override
     public String toString() {
         return "(" + "~" + inner + ")";

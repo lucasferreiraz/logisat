@@ -12,6 +12,14 @@ public class Implies extends Formula {
         this.right = right;
     }
 
+    public Formula getLeft() {
+        return left;
+    }
+
+    public Formula getRight() {
+        return right;
+    }
+
     @Override
     public String toString() {
         return "(" + left + "->" + right + ")";
