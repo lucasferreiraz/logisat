@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 import abstractions.formulas.Atomic;
 import abstractions.operators.And;
 import abstractions.operators.Implies;
@@ -10,13 +12,22 @@ public class App {
         Atomic p = new Atomic("p");
         Atomic q = new Atomic("q");
         Atomic r = new Atomic("r");
+        Atomic s = new Atomic("s");
         
         Or o = new Or(p, q);
-        And a = new And(p, r);
-        Implies i = new Implies(o, a);
+        Implies i = new Implies(o, r);
         Not n = new Not(i);
-        System.out.println(n);
-        System.out.println(Functions.atoms(n));
+        //System.out.println(n.toString());
+        //System.out.println(Functions.atoms(n));
+
+        HashMap<String, Boolean> interpretation = new HashMap<>();
+        interpretation.put("p", false);
+        interpretation.put("q", false);
+        interpretation.put("r", true);
+        interpretation.put("s", true);
+
+        System.out.println(Functions.truthValue(n, interpretation));
+        
 
     }
 }

@@ -1,5 +1,6 @@
 package functions;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ public class Functions {
 
     private static Set<String> setAtoms = new HashSet<String>();
     
-    //returns a set of atoms from a formula
+    //returns a list of atoms from a formula
     public static List<String> atoms(Formula formula) {
         if (formula instanceof Atomic) {
             setAtoms.add(formula.toString());
@@ -45,6 +46,42 @@ public class Functions {
                                          .collect(Collectors.toList());
 
         return listAtoms;
+    }
+
+    public static Boolean truthValue(Formula formula, HashMap<String, Boolean> interpretation){
+
+        if (formula instanceof Atomic){
+            return interpretation.get(formula.toString());
+        }
+        if (formula instanceof Not){
+            Not not = (Not) formula;
+            Boolean result = truthValue(not.getInner(), interpretation);
+            return !result;
+        }
+        if (formula instanceof Implies){
+            Implies implies = (Implies) formula;
+            Boolean left = truthValue(implies.getLeft(), interpretation);
+            Boolean right = truthValue(implies.getRight(), interpretation);
+
+            return ((left && !right) ? false : true);
+            //if (left && !right) { return false; }
+        }
+        if (formula instanceof Or){
+            Or or = (Or) formula;
+            Boolean left = truthValue(or.getLeft(), interpretation);
+            Boolean right = truthValue(or.getRight(), interpretation);
+
+            return ((left || right) ? true : false);
+        }
+        if (formula instanceof And){
+            And and = (And) formula;
+            Boolean left = truthValue(and.getLeft(), interpretation);
+            Boolean right = truthValue(and.getRight(), interpretation);
+
+            return ((left && right) ? true : false);
+        }
+
+        return null;
     }
 
 }
