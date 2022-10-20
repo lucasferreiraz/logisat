@@ -1,10 +1,10 @@
 package abstractions.formulas;
 
+//an atomic is also a formula.
 public class Atomic extends Formula {
 
     private String name;
     
-    //an atomic is also a formula.
     public Atomic(String name) {
         super();
         this.name = name;

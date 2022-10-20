@@ -14,20 +14,26 @@ public class App {
         Atomic r = new Atomic("r");
         Atomic s = new Atomic("s");
         
+        Not n = new Not(p);
+        Implies i = new Implies(p, q);
         Or o = new Or(p, q);
-        Implies i = new Implies(o, r);
-        Not n = new Not(i);
-        //System.out.println(n.toString());
+        And a = new And(o, i);
+        And b = new And(a, n);
+
+        System.out.println(b.toString());
         //System.out.println(Functions.atoms(n));
 
+        
         HashMap<String, Boolean> interpretation = new HashMap<>();
         interpretation.put("p", false);
         interpretation.put("q", false);
         interpretation.put("r", true);
         interpretation.put("s", true);
 
-        System.out.println(Functions.truthValue(n, interpretation));
-        
+        //System.out.println(interpretation);
 
+        //System.out.println(Functions.truthValue(n, interpretation));
+        
+        System.out.println(Functions.satisfabilityBruteForce(b));
     }
 }

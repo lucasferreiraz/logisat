@@ -3,6 +3,7 @@ package functions;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -17,6 +18,10 @@ import abstractions.operators.Or;
 public class Functions {
 
     private static Set<String> setAtoms = new HashSet<String>();
+
+    private static HashMap<String, Boolean> interpretationOne = new HashMap<>();
+    private static HashMap<String, Boolean> interpretationTwo = new HashMap<>();
+    private static HashMap<String, Boolean> result = new HashMap<>();
 
     //returns a list of atoms from a formula
     public static List<String> atoms(Formula formula) {
@@ -47,16 +52,6 @@ public class Functions {
                                          .collect(Collectors.toList());
 
         return listAtoms;
-    }
-
-    private static Stack<String> stackAtoms(List<String> listAtoms){
-        Stack<String> stack = new Stack<String>();
-
-        for(String atomic : listAtoms){
-            stack.push(atomic);
-        }
-
-        return stack;
     }
 
     public static Boolean truthValue(Formula formula, HashMap<String, Boolean> interpretation){
@@ -92,6 +87,66 @@ public class Functions {
         }
 
         return null;
+    }
+
+    public static HashMap<String, Boolean> satisfabilityBruteForce(Formula formula){
+
+        Stack<String> stackAtoms = stackAtoms(atoms(formula));
+        HashMap<String, Boolean> initialInterpretation = new HashMap<>();
+
+        return satisfability(formula, stackAtoms, initialInterpretation);
+
+    }
+
+    private static HashMap<String, Boolean> satisfability(Formula formula, Stack<String> listAtoms, HashMap<String, Boolean> interpretation){
+
+        if (listAtoms.isEmpty()){
+            if (truthValue(formula, interpretation)){
+                return interpretation;
+            } else {
+                return null;
+            }
+        }
+        
+        String atomic = listAtoms.pop();
+        
+        interpretationOne = copy(interpretation);
+        interpretationOne.put(atomic, true);
+
+        interpretationTwo = copy(interpretation);
+        interpretationTwo.put(atomic, false);
+
+        result = satisfability(formula, listAtoms, interpretationOne);
+
+        if (result != null){
+            return result;
+        }
+
+        return satisfability(formula, listAtoms, interpretationTwo);
+    }
+
+    //utilitary methods
+    //convert a list of atomics to a stack of atomics
+    private static Stack<String> stackAtoms(List<String> listAtoms){
+        Stack<String> stack = new Stack<String>();
+
+        for(String atomic : listAtoms){
+            stack.push(atomic);
+        }
+
+        return stack;
+    }
+
+    //creates and returns a copy of an interpretation
+    private static HashMap<String, Boolean> copy(HashMap<String, Boolean> original){
+
+        HashMap<String, Boolean> secondMap = new HashMap<>();
+
+        for(Map.Entry<String, Boolean> entry : original.entrySet()){
+            secondMap.put(entry.getKey(), entry.getValue());
+        }
+
+        return secondMap;
     }
 
 }
