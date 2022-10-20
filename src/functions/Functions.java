@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 import abstractions.formulas.Atomic;
@@ -16,7 +17,7 @@ import abstractions.operators.Or;
 public class Functions {
 
     private static Set<String> setAtoms = new HashSet<String>();
-    
+
     //returns a list of atoms from a formula
     public static List<String> atoms(Formula formula) {
         if (formula instanceof Atomic) {
@@ -48,6 +49,16 @@ public class Functions {
         return listAtoms;
     }
 
+    private static Stack<String> stackAtoms(List<String> listAtoms){
+        Stack<String> stack = new Stack<String>();
+
+        for(String atomic : listAtoms){
+            stack.push(atomic);
+        }
+
+        return stack;
+    }
+
     public static Boolean truthValue(Formula formula, HashMap<String, Boolean> interpretation){
 
         if (formula instanceof Atomic){
@@ -64,7 +75,6 @@ public class Functions {
             Boolean right = truthValue(implies.getRight(), interpretation);
 
             return ((left && !right) ? false : true);
-            //if (left && !right) { return false; }
         }
         if (formula instanceof Or){
             Or or = (Or) formula;
