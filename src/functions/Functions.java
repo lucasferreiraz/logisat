@@ -154,6 +154,7 @@ public class Functions {
         return secondMap;
     }
 
+    //creates and returns a copy of an stack
     private static Stack<String> copy(Stack<String> original){
         Stack<String> secondStack = new Stack<>();
 
