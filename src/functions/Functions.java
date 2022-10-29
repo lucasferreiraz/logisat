@@ -2,6 +2,7 @@ package functions;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,8 +20,6 @@ public class Functions {
 
     private static Set<String> setAtoms = new HashSet<String>();
 
-    private static HashMap<String, Boolean> interpretationOne = new HashMap<>();
-    private static HashMap<String, Boolean> interpretationTwo = new HashMap<>();
     private static HashMap<String, Boolean> result = new HashMap<>();
 
     //returns a list of atoms from a formula
@@ -100,6 +99,9 @@ public class Functions {
 
     private static HashMap<String, Boolean> satisfability(Formula formula, Stack<String> listAtoms, HashMap<String, Boolean> interpretation){
 
+        HashMap<String, Boolean> interpretationOne;
+        HashMap<String, Boolean> interpretationTwo;
+
         if (listAtoms.isEmpty()){
             if (truthValue(formula, interpretation)){
                 return interpretation;
@@ -109,20 +111,23 @@ public class Functions {
         }
         
         String atomic = listAtoms.pop();
-        
+
         interpretationOne = copy(interpretation);
         interpretationOne.put(atomic, true);
 
         interpretationTwo = copy(interpretation);
         interpretationTwo.put(atomic, false);
 
-        result = satisfability(formula, listAtoms, interpretationOne);
+        result = satisfability(formula, copy(listAtoms), interpretationOne);
 
+        
         if (result != null){
             return result;
+        } else {
+
+            return satisfability(formula, copy(listAtoms), interpretationTwo); 
         }
 
-        return satisfability(formula, listAtoms, interpretationTwo);
     }
 
     //utilitary methods
@@ -147,6 +152,17 @@ public class Functions {
         }
 
         return secondMap;
+    }
+
+    private static Stack<String> copy(Stack<String> original){
+        Stack<String> secondStack = new Stack<>();
+
+        Iterator<String> intItr = original.iterator();
+        while(intItr.hasNext())  {
+            secondStack.push(intItr.next());
+        }
+
+        return secondStack;
     }
 
 }
