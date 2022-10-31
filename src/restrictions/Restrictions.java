@@ -3,6 +3,7 @@ package restrictions;
 import java.util.ArrayList;
 import java.util.List;
 
+import abstractions.formulas.Atomic;
 import abstractions.formulas.Formula;
 import abstractions.operators.And;
 import abstractions.operators.Not;
@@ -18,21 +19,21 @@ public class Restrictions {
         for (int rule = 1; rule <= m ; rule++) {
             for (String attribute : attributes) {
                 if(!attribute.equals("P")){
-                    listOne.add(new Formula());
-                    listOne.add(new Not(new Formula()));
-                    listOne.add(new Not(new Formula()));
+                    listOne.add(new Atomic(attribute + "_" + rule + "_" + "gt"));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "sl")));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "s")));
                     listTwo.add(Semantics.bigAnd(listOne));
                     listOne.clear();
 
-                    listOne.add(new Not(new Formula()));
-                    listOne.add(new Formula());
-                    listOne.add(new Not(new Formula()));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "gt")));
+                    listOne.add(new Atomic(attribute + "_" + rule + "_" + "sl"));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "s")));
                     listTwo.add(Semantics.bigAnd(listOne));
                     listOne.clear();
 
-                    listOne.add(new Not(new Formula()));
-                    listOne.add(new Not(new Formula()));
-                    listOne.add(new Formula());
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "gt")));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "sl")));
+                    listOne.add(new Atomic(attribute + "_" + rule + "_" + "s"));
                     listTwo.add(Semantics.bigAnd(listOne));
                     listOne.clear();
 
