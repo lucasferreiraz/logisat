@@ -11,7 +11,7 @@ import semantic.Semantics;
 
 public class Restrictions {
 
-    public static And restrictionOne(Integer m, String[] attributes){
+    public static And restrictionOne(Integer m, List<String> attributes){
         List<Formula> listOne = new ArrayList<>();
         List<Formula> listTwo = new ArrayList<>();
         List<Formula> listThree = new ArrayList<>();
@@ -45,6 +45,23 @@ public class Restrictions {
 
         return Semantics.bigAnd(listThree);
 
+    }
+
+    public static And restrictionTwo(Integer m, List<String> attributes){
+        List<Formula> listOne = new ArrayList<>();
+        List<Formula> listTwo = new ArrayList<>();
+
+        for (int rule = 1; rule <= m ; rule++){
+            for (String attribute : attributes){
+                if(!attribute.equals("P")){
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "s")));
+                }
+            }
+            listTwo.add(Semantics.bigOr(listOne));
+            listOne.clear();
+        }
+
+        return Semantics.bigAnd(listTwo);
     }
 
 }
