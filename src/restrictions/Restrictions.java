@@ -20,19 +20,19 @@ public class Restrictions {
             for (String attribute : attributes) {
                 if(!attribute.equals("P")){
                     listOne.add(new Atomic(attribute + "_" + rule + "_" + "gt"));
-                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "sl")));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "le")));
                     listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "s")));
                     listTwo.add(Semantics.bigAnd(listOne));
                     listOne.clear();
 
                     listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "gt")));
-                    listOne.add(new Atomic(attribute + "_" + rule + "_" + "sl"));
+                    listOne.add(new Atomic(attribute + "_" + rule + "_" + "le"));
                     listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "s")));
                     listTwo.add(Semantics.bigAnd(listOne));
                     listOne.clear();
 
                     listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "gt")));
-                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "sl")));
+                    listOne.add(new Not(new Atomic(attribute + "_" + rule + "_" + "le")));
                     listOne.add(new Atomic(attribute + "_" + rule + "_" + "s"));
                     listTwo.add(Semantics.bigAnd(listOne));
                     listOne.clear();
