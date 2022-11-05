@@ -6,6 +6,7 @@ import java.util.List;
 import abstractions.formulas.Atomic;
 import abstractions.formulas.Formula;
 import abstractions.operators.And;
+import abstractions.operators.Implies;
 import abstractions.operators.Not;
 import semantic.Semantics;
 
@@ -62,6 +63,22 @@ public class Restrictions {
         }
 
         return Semantics.bigAnd(listTwo);
+    }
+
+    public static And restrictionFour(Integer m, List<String> attributes, List<List<String>> values){
+        List<Formula> listOne = new ArrayList<>();
+
+        int pacientes = 3;
+
+        for (int rule = 1; rule <= m ; rule++){
+            for (String attribute : attributes){
+                if(!attribute.equals("P")){
+                   if(values.get(rule).indexOf(attribute).equals("P")){
+                    listOne.add(new Implies(new Atomic(attribute + rule + "gt"), new Not(null)));
+                   }
+                }
+            }
+        }
     }
 
 }
