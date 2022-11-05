@@ -65,20 +65,20 @@ public class Restrictions {
         return Semantics.bigAnd(listTwo);
     }
 
-    public static And restrictionFour(Integer m, List<String> attributes, List<List<String>> values){
+    public static And restrictionFour(Integer m, List<String> attributes, List<List<String>> values, Integer patients){
         List<Formula> listOne = new ArrayList<>();
         List<Formula> listTwo = new ArrayList<>();
 
-        int pacientes = 3;
-
-        for(int p = 0; p < pacientes; p++){
-            for (int rule = 1; rule <= m ; rule++){
-                for (String attribute : attributes){
-                    if(!attribute.equals("P")){
-                        if(values.get(p).indexOf(attribute) == (Integer.parseInt("0"))){
-                            listOne.add(new Implies(new Atomic(attribute + "_" + rule + "_" + "gt"), new Not(new Atomic("C_" + rule + "_" + (p+1)))));
-                        } else {
-                            listOne.add(new Implies(new Atomic(attribute + "_" + rule + "_" + "le"), new Not(new Atomic("C_" + rule + "_" + (p+1)))));
+        for(int p = 0; p < patients; p++){
+            if(values.get(p).get(attributes.indexOf("P")).equals("1")){
+                for (int rule = 1; rule <= m ; rule++){
+                    for (String attribute : attributes){
+                        if(!attribute.equals("P")){
+                            if(values.get(p).get(attributes.indexOf(attribute)).equals("0")){
+                                listOne.add(new Implies(new Atomic(attribute + "_" + rule + "_" + "le"), new Not(new Atomic("C_" + rule + "_" + (p+1)))));
+                            } else {
+                                listOne.add(new Implies(new Atomic(attribute + "_" + rule + "_" + "gt"), new Not(new Atomic("C_" + rule + "_" + (p+1)))));
+                            }
                         }
                     }
 

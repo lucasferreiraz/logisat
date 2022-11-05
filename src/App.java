@@ -13,6 +13,8 @@ public class App {
         List<List<String>> values = new ArrayList<>();
         readData(attributes, values);
 
+        Integer patients = values.size();
+
         System.out.println(attributes);
         for(int i = 0; i < values.size(); i++){
             System.out.println(values.get(i));
@@ -23,7 +25,7 @@ public class App {
     public static void readData(List<String> attributes, List<List<String>> values){
 
         String absolutePath = new File("").getAbsolutePath();
-        String relativePath = "/src/data/column_bin_3a_3p.csv";
+        String relativePath = "/src/data/column_bin_5a_3p.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(absolutePath + relativePath))) {
             
