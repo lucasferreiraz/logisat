@@ -16,7 +16,7 @@ public class Not extends Formula {
 
     @Override
     public String toString() {
-        return "~" + inner;
+        return "\u00AC" + inner;
     }
 
     @Override

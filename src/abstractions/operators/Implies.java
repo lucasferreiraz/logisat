@@ -22,7 +22,7 @@ public class Implies extends Formula {
 
     @Override
     public String toString() {
-        return "(" + left + ">" + right + ")";
+        return "(" + left + " \u21D2 " + right + ")";
     }
 
     @Override

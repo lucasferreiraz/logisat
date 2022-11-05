@@ -22,7 +22,7 @@ public class And extends Formula {
 
     @Override
     public String toString() {
-        return "(" + left + "^" + right + ")";
+        return "(" + left + "\u2227" + right + ")";
     }
 
     @Override
