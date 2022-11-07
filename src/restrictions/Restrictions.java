@@ -120,4 +120,21 @@ public class Restrictions {
         return Semantics.bigAnd(listTwo);
     }
 
+    public static And restrictionFive(Integer m, List<String> attributes, List<List<String>> values, Integer patients){
+        List<Formula> listOne = new ArrayList<>();
+        List<Formula> listTwo = new ArrayList<>();
+
+        for(int j = 0; j < patients; j++){
+            if(values.get(j).get(attributes.indexOf("P")).equals("1")){
+                for (int rule = 1; rule <= m ; rule++){
+                    listOne.add(new Atomic("C_" + rule + (j + 1)));
+                }
+
+                listTwo.add(Semantics.bigOr(listOne));
+                listOne.clear();
+            }
+        }
+
+        return Semantics.bigAnd(listTwo);
+    }
 }
