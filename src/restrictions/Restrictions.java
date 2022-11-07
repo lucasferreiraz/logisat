@@ -65,6 +65,35 @@ public class Restrictions {
         return Semantics.bigAnd(listTwo);
     }
 
+    public static And restrictionThree(Integer m, List<String> attributes, List<List<String>> values, Integer patients){
+        List<Formula> listOne = new ArrayList<>();
+        List<Formula> listTwo = new ArrayList<>();
+
+        for (int j = 0; j < patients; j++) {
+
+            Boolean checkValue = values.get(j).get(attributes.indexOf("P")).equals("0");
+
+            if (checkValue){
+                for (int rule = 1; rule <= m; rule++) {
+                    for (String attribute : attributes) {
+                        if (!attribute.equals("P")) {
+                            //Boolean retornoAdd = checkValue ? listOne.add(new Atomic(attribute + rule + "le")) : listOne.add(new Atomic(attribute + rule + "le"));
+                            if (checkValue) {
+                                listOne.add(new Atomic(attribute + rule + "le"));
+                            } else {
+                                listOne.add(new Atomic(attribute + rule + "gt"));
+                            }
+                        }
+                    }
+                    listTwo.add(Semantics.bigOr(listOne));
+                    listOne.clear();
+                }
+            }
+        }
+
+        return Semantics.bigAnd(listTwo);
+    }
+
     public static And restrictionFour(Integer m, List<String> attributes, List<List<String>> values, Integer patients){
         List<Formula> listOne = new ArrayList<>();
         List<Formula> listTwo = new ArrayList<>();
