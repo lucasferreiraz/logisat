@@ -127,7 +127,7 @@ public class Restrictions {
         for(int j = 0; j < patients; j++){
             if(values.get(j).get(attributes.indexOf("P")).equals("1")){
                 for (int rule = 1; rule <= m ; rule++){
-                    listOne.add(new Atomic("C_" + rule + (j + 1)));
+                    listOne.add(new Atomic("C_" + rule + "_" + (j + 1)));
                 }
 
                 listTwo.add(Semantics.bigOr(listOne));

@@ -143,7 +143,7 @@ public class Functions {
     }
 
     //creates and returns a copy of an interpretation
-    private static HashMap<String, Boolean> copy(HashMap<String, Boolean> original){
+    public static HashMap<String, Boolean> copy(HashMap<String, Boolean> original){
 
         HashMap<String, Boolean> secondMap = new HashMap<>();
 
