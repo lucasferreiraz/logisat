@@ -78,10 +78,10 @@ public class Restrictions {
                     for (String attribute : attributes) {
                         if (!attribute.equals("P")) {
                             //Boolean retornoAdd = checkValue ? listOne.add(new Atomic(attribute + rule + "le")) : listOne.add(new Atomic(attribute + rule + "le"));
-                            if (checkValue) {
-                                listOne.add(new Atomic(attribute + rule + "le"));
+                            if (values.get(j).get(attributes.indexOf(attribute)).equals("0")) {
+                                listOne.add(new Atomic(attribute + "_" + rule + "_" + "le"));
                             } else {
-                                listOne.add(new Atomic(attribute + rule + "gt"));
+                                listOne.add(new Atomic(attribute + "_" + rule + "_" + "gt"));
                             }
                         }
                     }
