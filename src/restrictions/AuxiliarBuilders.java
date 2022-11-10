@@ -2,13 +2,15 @@ package restrictions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import functions.Functions;
 
 public class AuxiliarBuilders {
     
-    public List<String> rulesSet(Integer m, List<String> attributes, HashMap<String, Boolean> interpretation){
+    public static List<String> rulesSet(Integer m, List<String> attributes, HashMap<String, Boolean> interpretation){
         List<String> listOne = new ArrayList<>();
         List<String> listTwo = new ArrayList<>();
 
@@ -34,17 +36,19 @@ public class AuxiliarBuilders {
         return listTwo;
     }
 
-    public List<String> checkPatology(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation){
+    public static Set<String> checkPatology(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation){
         List<String> listOne = new ArrayList<>();
         List<String> listTwo = new ArrayList<>();
 
+        Set<String> set = new HashSet<>();
+
         HashMap<String, Boolean> interpretationCopy = Functions.copy(interpretation);
 
-        return sickList(m, p, attributes, values, interpretationCopy, listOne, listTwo);
+        return sickList(m, p, attributes, values, interpretationCopy, listOne, listTwo, set);
 
     }
 
-    private List<String> sickList(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation, List<String> listOne, List<String> listTwo) {
+    private static Set<String> sickList(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation, List<String> listOne, List<String> listTwo, Set<String> set) {
 
         for(int patient = 0; patient < p; patient++){
             for(int rule = 1; rule <= m; rule++){
@@ -64,36 +68,40 @@ public class AuxiliarBuilders {
                     }
                 }
 
-                if(s == listOne.size()){
+                /* 
+                if(!(s == listOne.size())){
+                    if(listTwo.contains(diagnosis(patient, 0))){ ; }
+                    else if(listTwo.contains(diagnosis(patient, 1))){ ; }  
+                    else{ listTwo.add(diagnosis(patient, 0)); }
+                }else{
                     if(listTwo.contains(diagnosis(patient, 0))){
                         listTwo.remove(diagnosis(patient, 0));
-                        listTwo.add(diagnosis(patient, 1));
-                    }else if(listTwo.contains(diagnosis(patient, 1))){ 
-                        ; 
-                    }
-                    else{
-                        listTwo.add(diagnosis(patient, 1));
-                    }
-                    
-                } else {
-                    if(listTwo.contains(diagnosis(patient, 0))){
-                        ;
-                    }else if(listTwo.contains(diagnosis(patient, 1))){
-                        ;
-                    } else {
-                        listTwo.add(diagnosis(patient, 0));
-                    }
+                        listTwo.add(diagnosis(patient, 1)); }
+                    else if(listTwo.contains(diagnosis(patient, 1))){ ; }
+                    else{ listTwo.add(diagnosis(patient, 1)); } 
                 }
-
                 listOne.clear();
+                */
+
+                
+                if(s == listOne.size()){
+                    if(set.contains(diagnosis(patient, 0))){
+                        set.remove(diagnosis(patient, 0));
+                        set.add(diagnosis(patient, 1));
+                    }
+                } else {
+                    set.add(diagnosis(patient, 0));
+                }
+                listOne.clear();
+                
             }
         }
 
-        return listTwo;
+        return set;
     }
 
-    private String diagnosis(int patient, int patology){
-       return (patology == 1) ? "Patient " + (patient + 1) + " has patoloy" : "Patient " + (patient + 1) + "has no patoloy";
+    private static String diagnosis(int patient, int patology){
+       return (patology == 1) ? "Patient " + (patient + 1) + " has patoloy" : "Patient " + (patient + 1) + " has no patoloy";
     }
 
 }
