@@ -34,4 +34,14 @@ public class AuxiliarBuilders {
         return listTwo;
     }
 
+    public List<String> checkPatology(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation){
+        List<String> listOne = new ArrayList<>();
+        List<String> listTwo = new ArrayList<>();
+
+        HashMap<String, Boolean> interpretationCopy = Functions.copy(interpretation);
+
+        return sickList(m, p, attributes, values, interpretationCopy, listOne, listTwo);
+
+    }
+
 }
