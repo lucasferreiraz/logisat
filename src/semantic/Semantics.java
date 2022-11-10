@@ -11,8 +11,12 @@ public class Semantics {
     public static And bigAnd(List<Formula> formulasList){
         Formula conjunction = formulasList.get(0);
 
-        for(int i = 1; i < formulasList.size(); i++){
-            conjunction = new And(conjunction, formulasList.get(i));
+        if(formulasList.size() == 1){
+            return new And(conjunction, conjunction);
+        } else {
+            for(int i = 1; i < formulasList.size(); i++){
+                conjunction = new And(conjunction, formulasList.get(i));
+            }
         }
 
         return (And) conjunction;
@@ -21,8 +25,12 @@ public class Semantics {
     public static Or bigOr(List<Formula> formulasList){
         Formula disjunction = formulasList.get(0);
 
-        for(int i = 1; i < formulasList.size(); i++){
-            disjunction = new Or(disjunction, formulasList.get(i));
+        if(formulasList.size() == 1){
+            return new Or(disjunction, disjunction);
+        } else {
+            for(int i = 1; i < formulasList.size(); i++){
+                disjunction = new Or(disjunction, formulasList.get(i));
+            }
         }
 
         return (Or) disjunction;
