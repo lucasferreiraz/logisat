@@ -44,4 +44,56 @@ public class AuxiliarBuilders {
 
     }
 
+    private List<String> sickList(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation, List<String> listOne, List<String> listTwo) {
+
+        for(int patient = 0; patient < p; patient++){
+            for(int rule = 1; rule <= m; rule++){
+                int s = 0;
+                for(String attribute : attributes){
+                    if(!attribute.equals("P")){
+                        if(!interpretation.get(attribute + "_" + rule + "_" + "s")){
+                            if(!interpretation.get(attribute + "_" + rule + "_" + "gt")){
+                                String attributeModified = attribute.replaceFirst("<=", ">");
+                                listOne.add(attributeModified);
+                                if(values.get(patient).get(attributes.indexOf(attribute)).equals("0")) { s=s+1 ; }
+                            } else {
+                                listOne.add(attribute);
+                                if(values.get(patient).get(attributes.indexOf(attribute)).equals("1")) { s=s+1; }
+                            }
+                        }
+                    }
+                }
+
+                if(s == listOne.size()){
+                    if(listTwo.contains(diagnosis(patient, 0))){
+                        listTwo.remove(diagnosis(patient, 0));
+                        listTwo.add(diagnosis(patient, 1));
+                    }else if(listTwo.contains(diagnosis(patient, 1))){ 
+                        ; 
+                    }
+                    else{
+                        listTwo.add(diagnosis(patient, 1));
+                    }
+                    
+                } else {
+                    if(listTwo.contains(diagnosis(patient, 0))){
+                        ;
+                    }else if(listTwo.contains(diagnosis(patient, 1))){
+                        ;
+                    } else {
+                        listTwo.add(diagnosis(patient, 0));
+                    }
+                }
+
+                listOne.clear();
+            }
+        }
+
+        return listTwo;
+    }
+
+    private String diagnosis(int patient, int patology){
+       return (patology == 1) ? "Patient " + (patient + 1) + " has patoloy" : "Patient " + (patient + 1) + "has no patoloy";
+    }
+
 }
