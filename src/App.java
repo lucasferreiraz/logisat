@@ -4,10 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import abstractions.operators.And;
 import functions.Functions;
@@ -42,25 +40,30 @@ public class App {
             System.out.println(values.get(i));
         }
 
+        System.out.println("\nNumber of supposed rules: " + m);
+
+        System.out.println("\nInterpretation: --------------->");
         System.out.println(Functions.satisfabilityBruteForce(F));
 
         
         if(interpretation != null){
+
             System.out.println("\nFor " + m + " rules, it was possible to generate a set such that:");
             System.out.println(AuxiliarBuilders.rulesSet(m, attributes, interpretation));
             System.out.println("\n");
 
             System.out.println("In this way, applying to the Dataset above, we conclude the pathology of all " + patients + " patients in such a way that:\n");
 
-            Set<String> reports = AuxiliarBuilders.checkPatology(m, patients, attributes, values, interpretation);
-            List<String> list = new ArrayList<String>(reports);
-            Collections.sort(list);
+            List<String> reports = AuxiliarBuilders.checkPatology(m, patients, attributes, values, interpretation);
+            //List<String> list = new ArrayList<String>(reports);
+            //Collections.sort(list);
 
-            for (String report : list) {
+            for (String report : reports) {
                 System.out.println(report);
             }
         } else {
-            System.out.println("The formula is unsatisfactory or the number of rules was not enough");
+            System.out.println("The assumed number of rules does not generate a satisfiable formula, or...");
+            System.out.println("the generated formula is not satisfiable. D;");
         }
         
     }
