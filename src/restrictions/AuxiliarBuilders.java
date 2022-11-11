@@ -2,9 +2,7 @@ package restrictions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import functions.Functions;
 
@@ -40,7 +38,7 @@ public class AuxiliarBuilders {
         
         List<String> listOne = new ArrayList<>();
         List<String> listTwo = new ArrayList<>();
-        Set<String> set = new HashSet<>();
+        //Set<String> set = new HashSet<>();
 
         HashMap<String, Boolean> interpretationCopy = Functions.copy(interpretation);
 
@@ -97,7 +95,7 @@ public class AuxiliarBuilders {
     }
 
     private static String diagnosis(int patient, int patology){
-       return (patology == 1) ? "Patient " + (patient + 1) + " has patoloy" : "Patient " + (patient + 1) + " has no patoloy";
+       return (patology == 1) ? "Patient " + (patient + 1) + " has patology" : "Patient " + (patient + 1) + " has no patology";
     }
 
 }

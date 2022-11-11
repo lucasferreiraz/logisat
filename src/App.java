@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -18,11 +17,10 @@ public class App {
 
         List<String> attributes = new ArrayList<>();
         List<List<String>> values = new ArrayList<>();
-        readData(attributes, values);
+        readData(attributes, values, args[0]);
 
         Integer patients = values.size();
-
-        Integer m = 2;
+        Integer m = Integer.parseInt(args[1]);         
 
         And f1 = Restrictions.restrictionOne(m, attributes);
         And f2 = Restrictions.restrictionTwo(m, attributes);
@@ -68,12 +66,37 @@ public class App {
         
     }
 
-    public static void readData(List<String> attributes, List<List<String>> values){
+    public static void readData(List<String> attributes, List<List<String>> values, String fileName){
 
+        /*
         String absolutePath = new File("").getAbsolutePath();
-        String relativePath = "/src/data/column_bin_3a_3p_alt.csv";
+        String relativePath = "/src/data/";
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(absolutePath + relativePath + fileName))) {
+            
+            //points to the first line of the file
+            String line = br.readLine();
+            for(String s : line.split(",")){
+                attributes.add(s);
+            }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(absolutePath + relativePath))) {
+            //points to the second line of the file
+            line = br.readLine();
+
+            while(line != null){
+                List<String> tmp = Arrays.asList(line.split(","));
+                values.add(tmp);
+                
+                line = br.readLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+         */
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(
+            App.class.getResourceAsStream("/data/" + fileName)))) {
             
             //points to the first line of the file
             String line = br.readLine();
