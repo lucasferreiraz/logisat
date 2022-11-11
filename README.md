@@ -68,13 +68,12 @@ Se **pelo menos uma regra** do conjunto se aplicar ao paciente, então ele possu
 
 ## Como Utilizar? 🔧
 
-O binário executavel **logisat.jar** (que pode ser baixado [aqui](https://github.com/lucasferreiraz/logisat/releases)) já inclui internamente todos os arquivos **.csv** que foram disponibilizados para teste, sendo necessário apenas passar o nome do arquivo completo no primeiro parâmetro na chamada no programa seguido do segunto parâmetro, sendo este último um número inteiro, que é o número de regras suposto inicialmente. <br><br>
-A lista de arquivos **.csv** suportados no programa são os mesmos que foram disponibilizados e o nome deles podem ser encontrado nesta [pasta](/src/data).
-
-
+O binário executavel **logisat.jar** (que pode ser baixado [aqui](https://github.com/lucasferreiraz/logisat/releases)) já inclui internamente todos os arquivos **.csv** que foram disponibilizados para teste, sendo necessário apenas passar o nome do arquivo completo no primeiro parâmetro na chamada no programa seguido do segunto parâmetro, sendo este último um número inteiro, que é o número de regras suposto inicialmente. <br>
 ```bash
 java -jar logisat.jar [fileName] [numberRules]
 ```
+A lista de arquivos **.csv** suportados no programa são os mesmos que foram disponibilizados e o nome deles podem ser encontrado nesta [pasta](/src/data).
+
 
 Posto isto, para utilizar, acesse a pasta onde o arquivo binário **.jar** está e abra o terminal na mesma pasta utilizando o seguinte comando, por exemplo, para o arquivo **column_bin_3a_3p.csv**.
 
@@ -94,6 +93,6 @@ Caso a fórmula gerada seja **insatisfatível** ou o numero suposto para o conju
 
 ---
 <p align="center" style="font-weight:bolder">
-    Developed with 💛 by <a href="https://github.com/lucasferreiraz">Lucas Ferreira</a> & <a href="https://github.com/walysonrodrigo">Walyson Rodrigo</a>
+    Developed with 💛 by <a href="https://github.com/lucasferreiraz">Lucas Ferreira</a> & <a href="https://github.com/walysonrodrigo">Walyson Rodrigo</a>.
     
 </p>
