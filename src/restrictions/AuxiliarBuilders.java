@@ -36,27 +36,21 @@ public class AuxiliarBuilders {
         return listTwo;
     }
 
-    public static Set<String> checkPatology(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation){
+    public static List<String> checkPatology(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation){
+        
         List<String> listOne = new ArrayList<>();
         List<String> listTwo = new ArrayList<>();
-
         Set<String> set = new HashSet<>();
 
         HashMap<String, Boolean> interpretationCopy = Functions.copy(interpretation);
-
-        return sickList(m, p, attributes, values, interpretationCopy, listOne, listTwo, set);
-
-    }
-
-    private static Set<String> sickList(Integer m, Integer p, List<String> attributes, List<List<String>> values, HashMap<String, Boolean> interpretation, List<String> listOne, List<String> listTwo, Set<String> set) {
 
         for(int patient = 0; patient < p; patient++){
             for(int rule = 1; rule <= m; rule++){
                 int s = 0;
                 for(String attribute : attributes){
                     if(!attribute.equals("P")){
-                        if(!interpretation.get(attribute + "_" + rule + "_" + "s")){
-                            if(!interpretation.get(attribute + "_" + rule + "_" + "gt")){
+                        if(!interpretationCopy.get(attribute + "_" + rule + "_" + "s")){
+                            if(interpretationCopy.get(attribute + "_" + rule + "_" + "gt")){
                                 String attributeModified = attribute.replaceFirst("<=", ">");
                                 listOne.add(attributeModified);
                                 if(values.get(patient).get(attributes.indexOf(attribute)).equals("0")) { s=s+1 ; }
@@ -68,7 +62,7 @@ public class AuxiliarBuilders {
                     }
                 }
 
-                /* 
+                
                 if(!(s == listOne.size())){
                     if(listTwo.contains(diagnosis(patient, 0))){ ; }
                     else if(listTwo.contains(diagnosis(patient, 1))){ ; }  
@@ -81,23 +75,25 @@ public class AuxiliarBuilders {
                     else{ listTwo.add(diagnosis(patient, 1)); } 
                 }
                 listOne.clear();
-                */
-
                 
+
+                /*
                 if(s == listOne.size()){
                     if(set.contains(diagnosis(patient, 0))){
                         set.remove(diagnosis(patient, 0));
+                        set.add(diagnosis(patient, 1));
+                    } else {
                         set.add(diagnosis(patient, 1));
                     }
                 } else {
                     set.add(diagnosis(patient, 0));
                 }
                 listOne.clear();
-                
+                 */
             }
         }
 
-        return set;
+        return listTwo;
     }
 
     private static String diagnosis(int patient, int patology){
