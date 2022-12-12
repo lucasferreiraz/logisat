@@ -74,20 +74,6 @@ public class AuxiliarBuilders {
                 }
                 listOne.clear();
                 
-
-                /*
-                if(s == listOne.size()){
-                    if(set.contains(diagnosis(patient, 0))){
-                        set.remove(diagnosis(patient, 0));
-                        set.add(diagnosis(patient, 1));
-                    } else {
-                        set.add(diagnosis(patient, 1));
-                    }
-                } else {
-                    set.add(diagnosis(patient, 0));
-                }
-                listOne.clear();
-                 */
             }
         }
 

@@ -53,8 +53,6 @@ public class App {
             System.out.println("In this way, applying to the Dataset above, we conclude the pathology of all " + patients + " patients in such a way that:\n");
 
             List<String> reports = AuxiliarBuilders.checkPatology(m, patients, attributes, values, interpretation);
-            //List<String> list = new ArrayList<String>(reports);
-            //Collections.sort(list);
 
             for (String report : reports) {
                 System.out.println(report);
@@ -67,33 +65,6 @@ public class App {
     }
 
     public static void readData(List<String> attributes, List<List<String>> values, String fileName){
-
-        /*
-        String absolutePath = new File("").getAbsolutePath();
-        String relativePath = "/src/data/";
-        
-        try (BufferedReader br = new BufferedReader(new FileReader(absolutePath + relativePath + fileName))) {
-            
-            //points to the first line of the file
-            String line = br.readLine();
-            for(String s : line.split(",")){
-                attributes.add(s);
-            }
-
-            //points to the second line of the file
-            line = br.readLine();
-
-            while(line != null){
-                List<String> tmp = Arrays.asList(line.split(","));
-                values.add(tmp);
-                
-                line = br.readLine();
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-         */
 
         try (BufferedReader br = new BufferedReader(new InputStreamReader(
             App.class.getResourceAsStream("/data/" + fileName)))) {
