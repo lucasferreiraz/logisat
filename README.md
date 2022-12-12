@@ -6,7 +6,7 @@
 
 ## Sobre 📚
 
-O projeto **logisat** foi desenvolvido durante a disciplina **Lógica para Computação** do curso de Ciências da Computação do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE), Campus  Maracanaú . Durante o curso, até a realização deste projeto, foram estudados todos os conceitos fundamentais de **modelagem de problemas** utilizando **lógica proposicional**, colocando todos os conceitos em prática durante o desenvolvimento, que consiste em um **algoritmo de aprendizagem de regras** para classificação de patologias da coluna vertebral.
+O projeto **logisat** foi desenvolvido por **Lucas Ferreira dos Santos** e **Walyson Rodrigo da Silva** durante a disciplina **Lógica para Computação** ministrada pelo professor **Thiago Alves** do curso de Ciências da Computação do Instituto Federal de Educação, Ciência e Tecnologia do Ceará (IFCE), Campus  Maracanaú. Durante o curso, até a realização deste projeto, foram estudados todos os conceitos fundamentais de **modelagem de problemas** utilizando **lógica proposicional**, colocando todos os conceitos em prática durante o desenvolvimento, que consiste em um **algoritmo de aprendizagem de regras** para classificação de patologias da coluna vertebral.
 
 ---
 
@@ -16,12 +16,12 @@ Cada arquivo **.csv** possui informações de alguns pacientes. Para cada uma de
 
 Cada, atributo possui uma sigla e um limitante inferior ou superior, na qual cada sigla representa:
 
-- Ângulo de incidência pélvica (PI)
-- Ãngulo de versão pélvica (PT)
+- ângulo de incidência pélvica (PI)
+- ângulo de versão pélvica (PT)
 - ângulo de lordose (LA)
-- Inclinação sacral (SS)
-- Raio pélvico (RP)
-- Grau de deslizamento (GS)
+- inclinação sacral (SS)
+- raio pélvico (RP)
+- grau de deslizamento (GS)
 
 Com uma tabela de informações similar a:
 
